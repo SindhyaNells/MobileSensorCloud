@@ -14,7 +14,9 @@ function user() {
             console.log(data);
             $("#user-table tbody tr").remove();
                 $.each(data, function (i, item) {
-                    $("#user-table").append($('<tr/>').append($('<td/>').append(item.user_id)).append($('<td/>').append(item.user_name)).append($('<td/>').append(item.user_email)));
+                    var count=1;
+                    $("#user-table").append($('<tr/>').append($('<td/>').append(count)).append($('<td/>').append(item.userName)).append($('<td/>').append(item.userEmail)));
+                    count++;
             });
         },
     });

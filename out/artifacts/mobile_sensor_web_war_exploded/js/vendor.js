@@ -8,26 +8,28 @@ function vendor(){
         success: function(resultData) {
             $("#vendor-table tbody tr").remove();
             $.each(resultData,function (i,item) {
-                $("#vendor-table").append($('<tr/>').append($('<td/>').append(item.vendor_id)).append($('<td/>').append(item.vendor_name)).append($('<td/>').append(item.vendor_email)));
+                var count=1;
+                $("#vendor-table").append($('<tr/>').append($('<td/>').append(count)).append($('<td/>').append(item.vendorName)).append($('<td/>').append(item.vendorEmail)));
+                count++;
             });
         },
     });
 
     jQuery.ajax({
-        url: "http://localhost:8181/sensor",
+        url: "http://localhost:8181/sensors",
         type: "GET",
         contentType: 'application/json',
         dataType:"json",
         success: function(resultData) {
-            $("#vendor-table tbody tr").remove();
+            $("#vendor-sensor-table tbody tr").remove();
             $.each(resultData,function (i,item) {
                 var status;
-                if(item.sensor_status=="true")
-                    status == "on";
+                if(item.sensorStatus)
+                    status = "on";
                     else
-                    status=="off";
+                    status="off";
 
-                $("#vendor-sensor-table").append($('<tr/>').append($('<td/>').append(item.sensor_id)).append($('<td/>').append(item.sensor_name)).append($('<td/>').append(item.sensor_type)).append($('<td/>').append(status)).append($('<td/>').append(item.sensor_location)).append($('<td>').append(item.sensor_vendor)));
+                $("#vendor-sensor-table").append($('<tr/>').append($('<td/>').append(item.sensorId)).append($('<td/>').append(item.sensorName)).append($('<td/>').append(item.sensorType)).append($('<td/>').append(status)).append($('<td/>').append(item.sensorLocation)).append($('<td>').append(item.vendorName)));
             });
         },
     });
