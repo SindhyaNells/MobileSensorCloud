@@ -13,7 +13,52 @@
 
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/chartist.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //Better to construct options first and then pass it as a parameter
+            var options = {
+                title: {
+                    text: "Temprature data for sensor 1"
+                },
+                axisX:{
+                    title:"Time"
+                },
+                axisY:{
+                    title:"Temprature"
+                },
+                animationEnabled: true,
+                data: [
+                    {
+                        type: "spline", //change it to line, area, column, pie, etc
+                        dataPoints: [
+                            { x: 6, y: 57 },
+                            { x: 7, y: 56 },
+                            { x: 8, y: 56 },
+                            { x: 9, y: 59 },
+                            { x: 10, y: 61 },
+                            { x: 11, y: 63 },
+                            { x: 12, y: 63 },
+                            { x: 13, y: 64 },
+                            { x: 14, y: 61 },
+                            { x: 15, y: 58 },
+                            { x: 16, y: 56 },
+                            { x: 17, y: 56 },
+                            { x: 18, y: 56 },
+                            { x: 19, y: 57 },
+                            { x: 20, y: 57 }
+                        ]
+                    }
+                ]
+            };
 
+            $("#chartContainer").CanvasJSChart(options);
+
+        });
+    </script>
 </head>
 <body>
 
@@ -79,11 +124,11 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <!--<li>
                            <a href="">
                                Account
                             </a>
-                        </li>
+                        </li>-->
 
                         <li>
                             <a href="#">
@@ -103,7 +148,7 @@
 
                     </div>
 
-                    <div class="col-md-8">
+                    <div id="chartContainer" class="col-md-8" style="height: 300px; width: 100%;">
 
                     </div>
                 </div>
@@ -136,8 +181,8 @@
 </body>
 
 
-  <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="js/chartist.min.js"></script>
+
+
+
 
 </html>

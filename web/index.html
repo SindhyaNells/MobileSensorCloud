@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  
+<!-- Form Mixin-->
+<!-- Input Mixin-->
+<!-- Button Mixin-->
+<!-- Pen Title-->
+<div class="pen-title">
+  <h1>Login </h1>
+</div>
+<!-- Form Module-->
+<div class="module form-module">
+  <div class="toggle"><i class="fa fa-times fa-pencil"></i>
+    <div class="tooltip">New User</div>
+  </div>
+  <div class="form">
+    <h2>Login to your account</h2>
+  <form name="login">
+            Username<input type="text" name="userid" id="userid"/>
+            Password<input type="password" name="pswrd" id="pswrd" />
+            <input type="button" onclick="check(userid.value,pswrd.value)" value="Login"/>
+            <input type="reset" value="Reset"/>
+        </form>
+        <script language="javascript">
+
+
+        function check(userid,pswrd) {
+        	
+        	var hash = {};
+            jQuery.ajax({
+            	
+            	
+                url:"http://localhost:8082/sensor_service/users",
+                type:"GET",
+                contentType:'application/json',
+                dataType:"json",
+                success:function(data) {
+                	
+                    $("#user-table tbody tr").remove();
+                        $.each(data, function (i, item) {
+
+                        	
+                        	hash[item.userName] = item.userPassword
+                       
+                    });
+                    if(hash[userid] == pswrd)
+                    	{
+                    	window.open("admin-dashboard.html")
+                    	}
+                    else
+                    	{
+                    	alert("invalid user name and password")
+                    	}
+                },
+                
+            });
+			//alert(hash[item.userName])
+        }
+        
+        </script>
+
+    
+  </div>
+  <div class="form">
+    <h2>Create an account</h2>
+    <form>
+      Username<input type="text" name="Username" id="Username"/>
+      Password<input type="password" name="Password" id="Password"/>
+      Email<input type="email" name="Email Address" id="email"/>
+      Phone<input type="tel" name="Phone Number" id="mobile"/>
+      <input type = "button" onclick = "regis()" value="Register"/>
+    </form>
+        <script language="javascript">
+            function regis(Username,Password,email,mobile) { /*function to check userid & password*/
+                /*the following code checkes whether the entered userid and password are matching*/
+            	jQuery.ajax({
+                    url:"http://localhost:8082/sensor_service/users",
+                    type:"GET",
+                    contentType:'application/json',
+                    dataType:"json",
+                    success:function() {
+                    	$("#user-table tbody tr").remove();
+                        $("#user-table").append($('<tr/>').append($('<td/>').append(mobile)).append($('<td/>').append(Username)).append($('<td/>').append(email)));
+                  
+                    },
+                });
+            }
+        </script>
+  </div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>
