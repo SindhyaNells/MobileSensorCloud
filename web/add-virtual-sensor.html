@@ -21,16 +21,22 @@
                 </a>
             </div>
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="user-dashboard.html">
                         <i class="fa fa-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="user-sensors.html">
                         <i class="fa fa-wifi" ></i>
-                        <p>Your Sensors</p>
+                        <p>My Sensors</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user-sensor-groups.html">
+                        <i class="fa fa-wifi" ></i>
+                        <p>My Sensor Groups</p>
                     </a>
                 </li>
             </ul>
@@ -53,26 +59,25 @@
                         <li>
                             <a href="index.html"> Log Out </a>
                         </li>
-                        <li>
+                        <!--<li>
                             <a href="user-settings.html" class="fa fa-cog fa-fw" data-target="#edit_profile" >
                                 </i>
                             </a>
-                        </li>
+                        </li>-->
 
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!---------------->
-        <!---------------->
         <!----Common------>
-        <!---------------->
-        <!---------------->
 
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-md-3">
+                        <button class="btn btn-info btn-fill pull-left" onclick="location.href='http://localhost:8182/user-sensors.html';"> <- Back</button>
+                    </div>
                     <div class="col-md-12">
                         <div class="card card-plain">
                             <div class="col-md-12">

@@ -11,7 +11,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 </head>
-<body onload="user_sensors()">
+<body onload="user_sensor_group()">
 <div class="wrapper">
     <div class="sidebar" data-color="black">
         <div class="sidebar-wrapper">
@@ -27,13 +27,13 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="user-sensors.html">
                         <i class="fa fa-wifi"></i>
                         <p>My Sensors</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="user-sensor-groups.html">
                         <i class="fa fa-wifi"></i>
                         <p>My Sensor Groups</p>
@@ -61,7 +61,7 @@
                             <a href="index.html"> Log Out </a>
                         </li>
                         <!--<li>
-                            <a href="user-settings.html" class="fa fa-cog fa-fw" data-target="#edit_profile">
+                            <a href="user-settings.html" class="fa fa-cog fa-fw" data-target="#edit_profile" >
                                 </i>
                             </a>
                         </li>-->
@@ -70,6 +70,7 @@
                 </div>
             </div>
         </nav>
+
 
         <!----Common------>
 
@@ -81,23 +82,20 @@
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="header">
-                                        <h4 class="title">Sensors
-                                            <input type=button onclick="location.href='add-virtual-sensor.html'"
-                                                   value="Add new Sensor" class="btn btn-info btn-fill pull-right"
-                                                   data-toggle="modal"></button>
+                                        <h4 class="title">My Subscribed Sensors
+                                            <button class="btn btn-info btn-fill pull-right" data-toggle="modal"
+                                                    data-target="#sensor-group">Create Group
+                                            </button>
                                         </h4>
                                     </div>
                                     <div class="content table-responsive table-full-width">
-                                        <table id="user-virtualsensor-table" class="table table-hover">
+                                        <table id="user-sensorGroup-table" class="table table-hover">
                                             <col width="10">
                                             <col width="40">
                                             <thead>
-                                            <th>Sensor Id</th>
-                                            <th>Sensor Name</th>
-                                            <th>sensor Location</th>
-                                            <th>sensor Status</th>
-                                            <th>sensor Type</th>
-                                            <th>vendor Name</th>
+                                            <th>No.</th>
+                                            <th>Group Name</th>
+                                            <th>Group Description</th>
                                             </thead>
                                             <tbody>
                                             <tr>
@@ -105,94 +103,81 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p>
-
-                                        <!--  TEST ----------->
-                                        <!--  <input type=button onclick="highset()" value="highest" class="btn btn-default btn-fill btn-sm pull-right" data-toggle="modal"></button>  -->
-                                        <!--  TEST ----------->
-                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="col-md-8">
+
+                    </div>
                 </div>
             </div>
         </div>
-
-        <footer class="footer">
-            <div class="container-fluid">
-
-            </div>
-        </footer>
-
-
     </div>
 </div>
 
 
-<div id="add-sensors" class="modal fade" role="dialog">
-    <!--   <div id="add-virtual-sensors" class="modal fade" role="dialog"> -->
+<div id="sensor-group" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add Sensor</h4>
+                <h4 class="modal-title">Create Sensor Group</h4>
             </div>
             <div class="modal-body">
                 <div class="content">
-                    <form id="myform">
+                    <form id="edit-form">
                         <div class="row">
                             <div class="col-md-7">
                                 <div class="form-group">
-                                    <label>Sensor No</label>
-                                    <input id="virtual_sensor-num" type="number" class="form-control"
-                                           placeholder="virtualSensorId" name="virtualSensorId">
+                                    <label>Sensor Id</label>
+                                    <input id="edit-sensor-num" type="number" class="form-control"
+                                           placeholder="Sensor No" name="sensorId">
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="form-group">
                                     <label>Sensor Name</label>
-                                    <input id="virtual_sensor-name" type="text" class="form-control"
-                                           placeholder="virtualSensorName" name="virtualSensorName">
+                                    <input id="edit-sensor-name" type="text" class="form-control"
+                                           placeholder="Sensor Name"
+                                           name="sensorName">
                                 </div>
                             </div>
-                            <!--  <div class="col-md-7">
-                                 <div class="form-group">
-                                       <label>Registered Email</label>
-                                    <input id="userEmail" type="text" class="form-control" placeholder="userEmail" name="userEmail">
-                                  </div>
-                             </div>
-
-                                 <div class="col-md-7">
-                                 <div class="form-group">
-                                       <label>Quantity</label>
-                                    <input id="quantity" type="number" class="form-control" placeholder="number" name="number">
-                                  </div>
-                             </div>
-
-                             <div class="col-md-7">
-                                 <div class="form-group">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label>Sensor Type</label>
+                                    <input id="edit-sensor-type" type="text" class="form-control"
+                                           placeholder="Sensor Type"
+                                           name="sensorType">
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
                                     <label>Status</label>
-                                    <select name="sensorStatus">
-                                       <option value="true">Active</option>
-                                       <option value="false">Inactive</option>
-                                        </select>
-                                 </div>
-                             </div>
-                             <div class="col-md-7">
-                                 <div class="form-group">
+                                    <!--input id="sensor-status" type="text" class="form-control" placeholder="state of sensor" name="sensorStatus"-->
+                                    <select id="edit-sensor-status" class="form-control" name="sensorStatus">
+                                        <option value="true">Active</option>
+                                        <option value="false">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
                                     <label>Location</label>
-                                 <select name="sensorLocation">
-                                       <option value="SFO">SFO</option>
-                                       <option value="Foster city">Foster city</option>
-                                        </select>
-                                 </div>
-                             </div> -->
+                                    <!--input id="sensor-location" type="text" class="form-control" placeholder="Location" name="sensorLocation"-->
+                                    <select id="edit-sensor-location" class="form-control" name="sensorLocation">
+                                        <option value="SFO">SFO</option>
+                                        <option value="Foster city">Foster city</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="col-md-7">
                                 <div class="form-group">
-                                    <input onclick="add_sensor()" type="submit" value="Submit">
-                                    <input type="submit" value="Cancel"/>
+                                    <input class="btn btn-info btn-fill pull-left" onclick="update_sensor()"
+                                           type="submit"
+                                           value="Submit">
+                                    <input class="btn btn-danger btn-fill pull-right" type="submit" value="Cancel"/>
                                 </div>
                             </div>
                         </div>
@@ -203,13 +188,12 @@
     </div>
 </div>
 
+
 </body>
 
 
 <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
-<script src="lodash.js"></script>
-<script src="js/chartist.min.js"></script>
-<script src="js/user-sensor.js"></script>
+<script src="js/user-sensor-group.js" type="text/javascript"></script>
 
 </html>

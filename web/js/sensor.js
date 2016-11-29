@@ -45,8 +45,10 @@ function Sensor(){
 
 }
 
+
 function add_sensor(){
-    var formData = $('#myform').serializeArray();
+
+    var formData = $('#add-form').serializeArray();
     var data = {};
     $(formData ).each(function(index, obj){
         data[obj.name] = obj.value;
@@ -60,12 +62,10 @@ function add_sensor(){
         success: function(data){
             alert("appended successfully");
         }
-
     });
-
 }
 
-function deleteSensor(event)
+function deleteSensor()
 {
     var a =event.target.dataset.id;
     var delete_endpoint= "http://localhost:8181/sensors/"+a;
@@ -109,20 +109,42 @@ function showDeleteDialog(del_flag){
 
 function editSensor(event)
 {
-    $('#sensor-num').prop('readonly', true);
+    $('#edit-sensor-num').prop('readonly', true);
     var ids =event.target.dataset.id;
     var name=event.target.dataset.name;
     var type=event.target.dataset.type;
-    var satus=event.target.dataset.status;
+    var status=event.target.dataset.status;
     var location=event.target.dataset.location;
-    $(".modal-body #sensor-num").val(ids);
-    $(".modal-body #sensor-name").val(name);
-    $(".modal-body #sensor-type").val(type);
-    $(".modal-body #sensor-satus").val(status);
-    $(".modal-body #sensor-location").val(location);
+    $(".modal-body #edit-sensor-num").val(ids);
+    $(".modal-body #edit-sensor-name").val(name);
+    $(".modal-body #edit-sensor-type").val(type);
+    $(".modal-body #edit-sensor-status").val(status);
+    $(".modal-body #edit-sensor-location").val(location);
 
-    $("#add-sensors").modal('show');
+    $("#edit-sensors").modal('show');
 
+
+}
+
+function update_sensor(){
+
+    var id=$('#edit-sensor-num').val();
+    alert(id);
+    var formData = $('#edit-form').serializeArray();
+    var data = {};
+    $(formData ).each(function(index, obj){
+        data[obj.name] = obj.value;
+    });
+
+    jQuery.ajax({
+        url: "http://localhost:8181/sensors/"+id,
+        type:"PUT",
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(data){
+            alert("updated successfully");
+        }
+    });
 }
 
 
