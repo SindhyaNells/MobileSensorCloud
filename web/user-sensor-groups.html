@@ -82,7 +82,7 @@
                             <div class="col-md-12">
                                 <div class="card card-plain">
                                     <div class="header">
-                                        <h4 class="title">My Subscribed Sensors
+                                        <h4 class="title">Sensors Groups
                                             <button class="btn btn-info btn-fill pull-right" data-toggle="modal"
                                                     data-target="#sensor-group">Create Group
                                             </button>
@@ -93,7 +93,7 @@
                                             <col width="10">
                                             <col width="40">
                                             <thead>
-                                            <th>No.</th>
+                                            <th>Id</th>
                                             <th>Group Name</th>
                                             <th>Group Description</th>
                                             </thead>
@@ -182,6 +182,52 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="list-sensor-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sensor Group</h4>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <div class="row">
+                        <div class="card card-plain">
+                            <div class="col-md-14">
+
+                                <div class="card card-plain">
+
+                                    <div class="header" id="title">
+                                        <h5 class="title">List of sensors</h5>
+                                    </div>
+                                    <div class="content table-responsive table-full-width">
+
+                                        <table id="list-sensor-table" class="table table-hover">
+                                            <col width="10">
+                                            <col width="40">
+                                            <thead>
+                                            <th>No</th>
+                                            <th>Sensor Name</th>
+                                            <th>Sensor Type</th>
+                                            <th>Sensor status</th>
+                                            <th>Sensor Location</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
