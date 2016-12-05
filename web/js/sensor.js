@@ -30,6 +30,7 @@ function Sensor(){
                 var status;
                 var $d=$('<button class="btn-sm btn-info btn-fill btn-danger btn-right " data-id="'+item.sensorId.toString()+'" toggle="modal" onclick="deleteSensor(event)">Delete</button>');
                 var $e=$('<button class="btn-sm btn-info btn-fill btn-warning btn-left " data-id="'+item.sensorId.toString()+'" data-name="'+item.sensorName+'" data-type="'+item.sensorType+'" data-status="'+item.status+'" data-location="'+item.sensorLocation+'"  toggle="modal" onclick="editSensor(event)" >Edit</button>');
+                var $s=$('<button class="btn-sm btn-info btn-fill btn-left" data-id="'+item.sensorId.toString()+'" toggle="modal" onclick="getSensorData(event)">View Sensor Data</button>');
 
                 if(item.sensorStatus==1){
                     status = "on";
@@ -37,9 +38,18 @@ function Sensor(){
                 else{
                     status="off";
                 }
-                $("#sensortable").append($('<tr/>').append($('<td/>').append(item.sensorId)).append($('<td/>').append(item.sensorName)).append($('<td/>').append(item.sensorType)).append($('<td/>').append(status)).append($('<td/>').append(item.sensorLocation)).append($('<td/>').append($e).append('&nbsp;&nbsp;').append($d)));
+                $("#sensortable").append($('<tr/>').append($('<td/>').append(item.sensorId)).append($('<td/>').append(item.sensorName)).append($('<td/>').append(item.sensorType)).append($('<td/>').append(status)).append($('<td/>').append(item.sensorLocation)).append($('<td/>').append($e).append('&nbsp;&nbsp;').append($s).append('&nbsp;&nbsp;').append($d)));
 
             });
+
+            /*$('#sensortable tr').click(function () {
+                var row=document.getElementById("sensortable").getElementsByTagName("tr");
+                var sensor_id=row[this.rowIndex].getElementsByTagName('td')[0].innerHTML;
+                //var rowIndex=this.rowIndex;
+                var url='http://localhost:8182/vendor-sensor-data.html?sensor='+encodeURIComponent(sensor_id);
+                document.location.href=url;
+
+            });*/
         },
     });
 
@@ -65,6 +75,14 @@ function add_sensor(){
     });
 }
 
+function getSensorData(event){
+
+    var sensor_id=event.target.dataset.id;
+    var url='http://localhost:8182/vendor-sensor-data.html?sensor='+encodeURIComponent(sensor_id);
+    document.location.href=url;
+
+}
+
 function deleteSensor()
 {
     var a =event.target.dataset.id;
@@ -83,13 +101,8 @@ function deleteSensor()
                 showDeleteDialog(0);
             }
 
-            window.onload = Refresh;
-            function Refresh() {
-                setTimeout("refreshPage();", 1000);
-            }
-            function refreshPage() {
-                window.location = location.href;
-            }
+            window.location.reload();
+
         }
     });
 }
@@ -124,7 +137,7 @@ function editSensor(event)
     $("#edit-sensors").modal('show');
 
 
-}
+    }
 
 function update_sensor(){
 

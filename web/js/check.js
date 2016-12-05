@@ -38,7 +38,7 @@ function checkusers(userid,pswrd) {
             {
 
                 fun2(userid)
-                window.open("users.html")
+                window.open("admin-users.html")
             }
             else
             {

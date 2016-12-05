@@ -11,7 +11,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 </head>
-<body onload="user_sensor_group()">
+<body onload="user_sensor_group();virtualSensorList()">
 <div class="wrapper">
     <div class="sidebar" data-color="black">
         <div class="sidebar-wrapper">
@@ -84,7 +84,7 @@
                                     <div class="header">
                                         <h4 class="title">Sensors Groups
                                             <button class="btn btn-info btn-fill pull-right" data-toggle="modal"
-                                                    data-target="#sensor-group">Create Group
+                                                    data-target="#create-sensor-modal">Create Group
                                             </button>
                                         </h4>
                                     </div>
@@ -117,76 +117,6 @@
     </div>
 </div>
 
-
-<div id="sensor-group" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Create Sensor Group</h4>
-            </div>
-            <div class="modal-body">
-                <div class="content">
-                    <form id="edit-form">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label>Sensor Id</label>
-                                    <input id="edit-sensor-num" type="number" class="form-control"
-                                           placeholder="Sensor No" name="sensorId">
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label>Sensor Name</label>
-                                    <input id="edit-sensor-name" type="text" class="form-control"
-                                           placeholder="Sensor Name"
-                                           name="sensorName">
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label>Sensor Type</label>
-                                    <input id="edit-sensor-type" type="text" class="form-control"
-                                           placeholder="Sensor Type"
-                                           name="sensorType">
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <!--input id="sensor-status" type="text" class="form-control" placeholder="state of sensor" name="sensorStatus"-->
-                                    <select id="edit-sensor-status" class="form-control" name="sensorStatus">
-                                        <option value="true">Active</option>
-                                        <option value="false">Inactive</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label>Location</label>
-                                    <!--input id="sensor-location" type="text" class="form-control" placeholder="Location" name="sensorLocation"-->
-                                    <select id="edit-sensor-location" class="form-control" name="sensorLocation">
-                                        <option value="SFO">SFO</option>
-                                        <option value="Foster city">Foster city</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <input class="btn btn-info btn-fill pull-left" onclick="update_sensor()"
-                                           type="submit"
-                                           value="Submit">
-                                    <input class="btn btn-danger btn-fill pull-right" type="submit" value="Cancel"/>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div id="list-sensor-modal" class="modal fade" role="dialog">
@@ -226,6 +156,72 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="create-sensor-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Sensor Group</h4>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <div class="row">
+                        <div class="card card-plain">
+
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label>Sensor Group Name</label>
+                                    <input id="sensor-grp-name" type="text" class="form-control"
+                                           placeholder="Sensor Group Name" name="sensorGrpName">
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label>Sensor Group Description</label>
+                                    <input id="sensor=grp-desc" type="text" class="form-control"
+                                           placeholder="Sensor Group Description"
+                                           name="sensorGrpDesc">
+                                </div>
+                            </div>
+
+                            <div class="col-md-14">
+                                <div class="card card-plain">
+                                    <!--<div class="header">
+                                        <h5 class="title">Select sensor</h5>
+                                    </div>-->
+                                    <div class="content table-responsive table-full-width">
+
+                                        <table id="create-sensor-grp-table" class="table table-hover">
+                                            <col width="10">
+                                            <col width="40">
+                                            <thead>
+                                            <th>No</th>
+                                            <th>Sensor Name</th>
+                                            <th>Sensor Type</th>
+                                            <th>Sensor status</th>
+                                            <th>Sensor Location</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                        <div class="form-group">
+                            <input onclick="add_sensor_group()" type="button" class="btn btn-info btn-fill" value="Submit">
+                            <input type="button" class="btn btn-info btn-fill btn-danger" value="Cancel"/>
+                        </div>
                         </div>
                     </div>
                 </div>

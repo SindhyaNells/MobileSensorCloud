@@ -9,7 +9,7 @@ function vendor(){
             $("#vendor-table tbody tr").remove();
             $.each(resultData,function (i,item) {
                 //var link=document.createElement("a");
-                //link.href="users.html";
+                //link.href="admin-users.html";
                 $("#vendor-table").append($('<tr/>').append($('<td/>').append(i+1)).append($('<td/>').append(item.vendorName)).append($('<td/>').append(item.vendorEmail)));
             });
 

@@ -16,6 +16,26 @@ function sortByProperty(sensorGrpId) {
     };
 }
 
+function add_sensor_group(){
+
+    var formData = document.getElementById('sensor-grp-name').value;
+    alert(formData);
+    var data = {};
+    $(formData ).each(function(index, obj){
+        data[obj.name] = obj.value;
+    });
+
+    /*jQuery.ajax({
+        url: "http://localhost:8181/virtualSensorGroup",
+        type:"POST",
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(data){
+            alert("appended successfully");
+        }
+    });*/
+}
+
 function user_sensor_group() {
 
     jQuery.ajax({
@@ -30,12 +50,12 @@ function user_sensor_group() {
             $("#user-sensorGroup-table tbody tr").remove();
             $.each(data, function (i, item) {
 
-                var $l=$('<button class="btn-xs btn-info btn-fill pull-right" data-id="'+item.sensorGroupId.toString()+'" data-name="'+item.sensorGroupName+'" data-list="'+item.virtualSensorId+'" toggle="modal" onclick="listSensors(event)">List Sensors</button>');
-                var $d=$('<button class="btn-xs btn-info btn-fill btn-danger pull-right" data-id="'+item.sensorGroupId.toString()+'" toggle="modal" onclick="deleteGroup(event)" >Delete Group</button>');
+                var $l=$('<button class="btn-sm btn-info btn-fill btn-right" data-id="'+item.sensorGroupId.toString()+'" data-name="'+item.sensorGroupName+'" data-list="'+item.virtualSensorId+'" toggle="modal" onclick="listSensors(event)">List Sensors</button>');
+                var $d=$('<button class="btn-sm btn-info btn-fill btn-danger btn-right" data-id="'+item.sensorGroupId.toString()+'" toggle="modal" onclick="deleteGroup(event)" >Delete Group</button>');
 
 
                 //$("#user-virtualsensor-table").append($('<tr/>').append($('<td/>').append(item.virtualSensorId)).append($('<td/>').append(item.sensorName)).append($('<td/>').append(item.sensorLocation)).append($('<td/>').append(item.sensorStatus)).append($('<td/>').append(item.sensorType)).append($('<td/>').append(item.vendorName)).append($('<input type=button onclick="location.href=`edit_user.html`" value= "Delete" class="btn btn-default btn-fill btn-sm" data-toggle="modal" data-target="#edit-users"></button>')));
-                $("#user-sensorGroup-table").append($('<tr/>').append($('<td/>').append(item.sensorGroupId)).append($('<td/>').append(item.sensorGroupName)).append($('<td/>').append(item.sensorGroupDescription)).append($('<td/>').append($l)).append($('<td/>').append($d)));
+                $("#user-sensorGroup-table").append($('<tr/>').append($('<td/>').append(item.sensorGroupId)).append($('<td/>').append(item.sensorGroupName)).append($('<td/>').append(item.sensorGroupDescription)).append($('<td/>').append($l).append('&nbsp;&nbsp;').append($d)));
 
             });
         },
@@ -73,6 +93,37 @@ function deleteGroup(event){
     });
 
 
+}
+
+function virtualSensorList(){
+    jQuery.ajax({
+        url:"http://localhost:8181/virtualsensor",
+        //url:"http://localhost:8080/sensor_service/virtualsensor?user_email=archana@sjsu.edu",
+        type:"GET",
+        contentType:'application/json',
+        dataType:"json",
+        success:function(data) {
+            console.log(data);
+            var i=1;
+            data.sort(sortByProperty('virtualSensorId'));
+            $("#create-sensor-grp-table tbody tr").remove();
+            $.each(data, function (i, item) {
+                var status;
+                var $d=$('<input type="checkbox" data-id="'+item.virtualSensorId.toString()+'" toggle="modal">');
+                //var $e=$('<button class="btn-xs btn-info btn-fill btn-edit btn-pace-left " data-id="'+item.virtualSensorId.toString()+'" data-name="'+item.virtualSensorName+'"  toggle="modal" onclick="editSensor(event)" >Edit</button>');
+
+                if(item.sensorStatus==1){
+                    status = "on";
+                }
+                else{
+                    status="off";
+                }
+                //$("#user-virtualsensor-table").append($('<tr/>').append($('<td/>').append(item.virtualSensorId)).append($('<td/>').append(item.sensorName)).append($('<td/>').append(item.sensorLocation)).append($('<td/>').append(item.sensorStatus)).append($('<td/>').append(item.sensorType)).append($('<td/>').append(item.vendorName)).append($('<input type=button onclick="location.href=`edit_user.html`" value= "Delete" class="btn btn-default btn-fill btn-sm" data-toggle="modal" data-target="#edit-users"></button>')));
+                $("#create-sensor-grp-table").append($('<tr/>').append($('<td/>').append(item.virtualSensorId)).append($('<td/>').append(item.virtualSensorName)).append($('<td/>').append(item.sensorLocation)).append($('<td/>').append(status)).append($('<td/>').append(item.sensorType)).append($('<td/>').append(item.vendorName)).append($('<td/>').append($d)));
+                i++;
+            });
+        },
+    });
 }
 
 function listSensors(event){
